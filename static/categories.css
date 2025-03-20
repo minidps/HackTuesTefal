@@ -1,27 +1,25 @@
-<<<<<<< HEAD
+
 .text1 {
     background-color: lightblue;
     height: 200px;
     width: 200px;
     position: static;
+    margin-right: 20px;
 }
 
 .text2 {
-    background-color: lightpink;
+    background-color: lightblue;
     height: 200px;
     width: 200px;
 }
 
 .header {
-    background-color: black;
-    color: white;
+    background-color: lightgrey;
+    color: black;
     position: fixed;
-    top: 0;
+    height: 60px;
+    top: 50px;
     left: 50px;
     right: 50px;
-=======
-.text {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: large;
->>>>>>> b9eef2a3495bf86bd66d7422c10ad19c31a5b345
+    text-align: center;
 }

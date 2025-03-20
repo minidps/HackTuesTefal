@@ -24,6 +24,8 @@ def budget(category):
             goal_amount = float(request.form.get('goal_amount', 0))
         except ValueError:
             goal_amount = 0
+
+        goal_description = request.form.get('goal_description', "reach your goal")
         
         calculation_type = request.form.get('calculation_type')
         if calculation_type == 'time':
@@ -31,7 +33,7 @@ def budget(category):
                 monthly_savings = float(request.form.get('monthly_savings', 0))
                 if monthly_savings > 0:
                     time_required = goal_amount / monthly_savings
-                    result = f"It will take approximately {time_required:.1f} months to reach your goal."
+                    result = f"It will take approximately {time_required:.1f} months to {goal_description}."
                 else:
                     result = "Please enter a valid monthly savings amount."
             except ValueError:
@@ -41,7 +43,7 @@ def budget(category):
                 time_limit = float(request.form.get('time_limit', 0))
                 if time_limit > 0:
                     monthly_required = goal_amount / time_limit
-                    result = f"You need to save approximately {monthly_required:.2f} per month to reach your goal in {time_limit} months."
+                    result = f"You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
                 else:
                     result = "Please enter a valid time limit."
             except ValueError:
