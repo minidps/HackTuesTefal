@@ -48,3 +48,38 @@
         {% endif %}
     </div>
     </body>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            function toggleCalculationFields() {
+                var calcType = document.querySelector('input[name="calculation_type"]:checked');
+                if(calcType) {
+                    if(calcType.value === 'time'){
+                        document.getElementById('monthlyField').style.display = 'none';
+                    } else if(calcType.value === 'monthly'){
+                        document.getElementById('monthlyField').style.display = 'block';
+                    }
+                }
+            }
+            var radios = document.querySelectorAll('input[name="calculation_type"]');
+            radios.forEach(function(radio){
+                radio.addEventListener('change', toggleCalculationFields);
+            });
+            toggleCalculationFields();
+        });
+        </script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category') || 'General';
+
+        // Update the page title and heading dynamically
+        document.title = category.charAt(0).toUpperCase() + category.slice(1) + " Budget Template";
+        document.querySelector("h1").innerText = category.charAt(0).toUpperCase() + category.slice(1) + " Budget Template";
+    });
+</script>
