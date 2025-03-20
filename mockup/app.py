@@ -10,49 +10,45 @@ def home():
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
     result = None
+    error = None
+    
     if request.method == 'POST':
         try:
             salary = float(request.form.get('salary', 0))
             expenses = float(request.form.get('expenses', 0))
             additional_income = float(request.form.get('additional_income', 0))
-        except ValueError:
-            salary, expenses,additional_income = 0, 0, 0
-        
-        
-        # Goal fields
-        try:
             goal_amount = float(request.form.get('goal_amount', 0))
+            time_limit = float(request.form.get('time_limit', 0))
+            
+            if salary < 0 or expenses < 0 or additional_income < 0 or goal_amount < 0 or time_limit < 0:
+                raise ValueError("Values cannot be negative.")
         except ValueError:
-            goal_amount = 0
-
-        goal_description = request.form.get('goal_description', "reach your goal")
+            error = "Please enter valid positive numbers for all fields."
+            return render_template("budget.html", category=category, result=result, error=error)
         
+        goal_description = request.form.get('goal_description', "reach your goal")
         calculation_type = request.form.get('calculation_type')
+        
+        monthly_savings = salary + additional_income - expenses
+        
         if calculation_type == 'time':
-            try:
-                monthly_savings = salary + additional_income - expenses
-                if monthly_savings > 0:
-                    time_required = goal_amount / monthly_savings
-                    result = f"It will take approximately {time_required:.1f} months to {goal_description}."
-                else:
-                    result = "Please enter a valid monthly savings amount."
-            except ValueError:
-                result = "Invalid monthly savings input."
+            if monthly_savings > 0:
+                time_required = goal_amount / monthly_savings
+                result = f"It will take approximately {time_required:.1f} months to {goal_description}."
+            else:
+                result = "Your monthly savings must be greater than zero to calculate time."
+        
         elif calculation_type == 'monthly':
-            try:
-                time_limit = float(request.form.get('time_limit', 0))
-                if time_limit > 0:
-                    monthly_required = goal_amount / time_limit
-                    if monthly_required<=salary + additional_income:
-                        result = f"You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
-                    elif monthly_required>=salary + additional_income:
-                        result = f"With your current income you wouldn't be able to get to your goal for the given time. You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
+            if time_limit > 0:
+                monthly_required = goal_amount / time_limit
+                if monthly_required <= monthly_savings:
+                    result = f"You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
                 else:
-                    result = "Please enter a valid time limit."
-            except ValueError:
-                result = "Invalid time limit input."
+                    result = f"With your current income, you cannot reach your goal in the given time. You need to save {monthly_required:.2f} per month."
+            else:
+                error = "Please enter a valid time limit greater than zero."
     
-    return render_template("budget.html", category=category, result=result)
+    return render_template("budget.html", category=category, result=result, error=error)
 
 if __name__ == '__main__':
     app.run(debug=True)
