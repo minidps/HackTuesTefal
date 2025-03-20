@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneySolver</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            padding: 50px;
+        }
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .category {
+            background: white;
+            padding: 30px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            text-decoration: none;
+            color: black;
+        }
+        .category:hover {
+            transform: scale(1.05);
+        }
+        .category img {
+            width: 50px;
+            height: 50px;
+            background: #007bff;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .category h3 {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .footer {
+            background: #e9ecef;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        .creators a {
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>КАТЕГОРИИ</h2>
+        <div class="categories">
+            <a href="budget.html" class="category">
+                <img src="icon1.png" alt="Single">
+                <h3>SINGLE</h3>
+            </a>
+            <a href="budget.html" class="category">
+                <img src="icon2.png" alt="Family">
+                <h3>FAMILY</h3>
+            </a>
+            <a href="budget.html" class="category">
+                <img src="icon3.png" alt="Company">
+                <h3>COMPANY</h3>
+            </a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <h3>ABOUT MONEYSOLVER</h3>
+        <p>By understanding where your money goes and planning for the future, you can work toward your financial aspirations with confidence. MoneySolver will help you with just that. Stay committed, make informed decisions, and watch your goals become reality!</p>
+        
+        <h3>CREATORS</h3>
+        <div class="creators">
+            <a href="#">Anna Sivcheva</a>
+            <a href="#">Martin Angelov</a>
+            <a href="#">Dimitar Slavov</a>
+            <a href="#">Boyan Toshmakov</a>
+        </div>
+    </div>
+</body>
+</html>
