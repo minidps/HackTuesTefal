@@ -9,10 +9,8 @@
             var calcType = document.querySelector('input[name="calculation_type"]:checked');
             if(calcType) {
                 if(calcType.value === 'time'){
-                    document.getElementById('timeField').style.display = 'block';
                     document.getElementById('monthlyField').style.display = 'none';
                 } else if(calcType.value === 'monthly'){
-                    document.getElementById('timeField').style.display = 'none';
                     document.getElementById('monthlyField').style.display = 'block';
                 }
             }

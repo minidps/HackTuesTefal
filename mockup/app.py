@@ -43,7 +43,10 @@ def budget(category):
                 time_limit = float(request.form.get('time_limit', 0))
                 if time_limit > 0:
                     monthly_required = goal_amount / time_limit
-                    result = f"You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
+                    if monthly_required<=salary + additional_income:
+                        result = f"You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
+                    elif monthly_required>=salary + additional_income:
+                        result = f"With your current income you wouldn't be able to get to your goal for the given time. You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
                 else:
                     result = "Please enter a valid time limit."
             except ValueError:
