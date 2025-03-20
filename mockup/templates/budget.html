@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ category.replace('_', ' ').title() }} Budget Template</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+        function toggleCalculationFields() {
+            var calcType = document.querySelector('input[name="calculation_type"]:checked');
+            if(calcType) {
+                if(calcType.value === 'time'){
+                    document.getElementById('timeField').style.display = 'block';
+                    document.getElementById('monthlyField').style.display = 'none';
+                } else if(calcType.value === 'monthly'){
+                    document.getElementById('timeField').style.display = 'none';
+                    document.getElementById('monthlyField').style.display = 'block';
+                }
+            }
+        }
+        var radios = document.querySelectorAll('input[name="calculation_type"]');
+        radios.forEach(function(radio){
+            radio.addEventListener('change', toggleCalculationFields);
+        });
+        toggleCalculationFields();
+    });
+    </script>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>{{ category.replace('_', ' ').title() }} Budget Template</h1>
+    <form method="post">
+        <div class="form-group">
+            <label for="salary">Salary (Income):</label>
+            <input type="number" step="0.01" class="form-control" name="salary" required>
+        </div>
+        <div class="form-group">
+            <label for="expenses">Expenses:</label>
+            <input type="number" step="0.01" class="form-control" name="expenses" required>
+        </div>
+        <div class="form-group">
+            <label for="additional_income">Additional Income (optional):</label>
+            <input type="number" step="0.01" class="form-control" name="additional_income">
+        </div>
+        <hr>
+        <h3>Goal Setting</h3>
+        <div class="form-group">
+            <label for="goal_amount">Goal Amount:</label>
+            <input type="number" step="0.01" class="form-control" name="goal_amount" required>
+        </div>
+        <div class="form-group">
+            <label for="goal_description">Goal Description:</label>
+            <input type="text" class="form-control" name="goal_description" placeholder="e.g., Buy a car" required>
+        </div>
+        <div class="form-group">
+            <label>Calculation Option:</label><br>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="calculation_type" id="calcTime" value="time" required>
+              <label class="form-check-label" for="calcTime">How long will it take?</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="calculation_type" id="calcMonthly" value="monthly" required>
+              <label class="form-check-label" for="calcMonthly">How much to save per month?</label>
+            </div>
+        </div>
+        <div class="form-group" id="timeField" style="display:none;">
+            <label for="monthly_savings">Monthly Savings (Enter amount to save per month):</label>
+            <input type="number" step="0.01" class="form-control" name="monthly_savings">
+        </div>
+        <div class="form-group" id="monthlyField" style="display:none;">
+            <label for="time_limit">Time Limit (Enter time in months):</label>
+            <input type="number" step="0.1" class="form-control" name="time_limit">
+        </div>
+        <button type="submit" class="btn btn-success">Calculate Goal</button>
+    </form>
+    {% if result %}
+    <div class="alert alert-info mt-3">
+        {{ result }}
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
