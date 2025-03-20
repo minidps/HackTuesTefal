@@ -23,6 +23,17 @@
         });
         toggleCalculationFields();
     });
+    // da ne moje da pishe e
+    document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('input[type="number"]').forEach(function(input){
+        input.addEventListener('keydown', function(event){
+            // Prevent 'e', 'E', and '-'
+            if (event.key === 'e' || event.key === 'E' || event.key === '-') {
+                event.preventDefault();
+            }
+        });
+    });
+});
 </script>
 </head>
 <body>
