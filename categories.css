@@ -1,4 +1,21 @@
-.text {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: large;
+.text1 {
+    background-color: lightblue;
+    height: 200px;
+    width: 200px;
+    position: static;
+}
+
+.text2 {
+    background-color: lightpink;
+    height: 200px;
+    width: 200px;
+}
+
+.header {
+    background-color: black;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 50px;
+    right: 50px;
 }
