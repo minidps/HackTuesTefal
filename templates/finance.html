@@ -43,11 +43,12 @@
                     <p>
                         {{'%0.2f' % monthly_required}} $/month
                     </p>
-                    {%endif category == 'single'%}
+                    {% endif%}
                 
                 {% elif category == 'business'%}
-                    <label></label>
-                    <p></p>
+                    <label>Workers:</label>
+                    <p> {workers} </p>
+                {% endif %}
             </form>
         </div>
     </body>
