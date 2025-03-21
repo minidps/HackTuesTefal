@@ -8,6 +8,7 @@
         <div class="container">
             <h1>Results:</h1>
             <form method="POST" action="/budget/{{ category }}">
+
                 <label>Gross Income:</label>
                 <p>
                     {{ salary|float|round(2) }} 
@@ -15,12 +16,12 @@
 
                 <label>Taxes:</label>
                 <p>
-                    
+                    {{taxes}}
                 </p>
 
                 <label>Net Income:</label>
                 <p>
-
+                    {{net_salary}}
                 </p>
 
                 <label>Your Goal:</label>

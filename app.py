@@ -11,18 +11,10 @@ def home():
 
 @app.route('/finance')
 def finance():
-    # Retrieve data from session
-    finance_data = {
-        'salary': session.get('salary', 0),
-        'expenses': session.get('expenses', 0),
-        'additional_income': session.get('additional_income', 0),
-        'monthly_savings': session.get('monthly_savings', 0),
-        'goal_amount': session.get('goal_amount', 0),
-        'goal_description': session.get('goal_description', 'reach your goal'),
-        'time_limit': session.get('time_limit', 0),
-        'monthly_required': session.get('monthly_required', '')
-    }
-    return render_template("finance.html", **session)
+    salary = session['salary']
+    taxes = salary * 0.1378
+    net_salary = salary - taxes
+    return render_template("finance.html", taxes=taxes, net_salary=net_salary, **session)
 
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
@@ -79,7 +71,7 @@ def budget(category):
             session['time_limit'] = time_limit
             session['time_required'] = time_required
             session['monthly_required'] = monthly_required if monthly_required else error
-
+            
             return redirect("/finance")
         except ValueError as e:
             error = str(e) + traceback.format_exc() if str(e) else "Please enter valid numbers for all fields."
