@@ -10,12 +10,12 @@
             <form method="POST" action="/budget/{{ category }}">
                 <label>Gross Income:</label>
                 <p>
-
+                    {{ salary|float|round(2) }} 
                 </p>
 
                 <label>Taxes:</label>
                 <p>
-
+                    
                 </p>
 
                 <label>Net Income:</label>
@@ -35,12 +35,12 @@
 
                 <label>Your Time Limit:</label>
                 <p>
-
+                    {{ time_limit|float|round(1) }} months
                 </p>
 
                 <label>Money Needed Per Month For Reaching Your Goal:</label>
                 <p>
-
+                    {{finance_data["monthly_required"]|float|round(2)}}
                 </p>
             </form>
         </div>
