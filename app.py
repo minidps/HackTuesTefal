@@ -11,10 +11,14 @@ def home():
 
 @app.route('/finance')
 def finance():
+    category = session['category']
     salary = session['salary']
     taxes = salary * 0.1378
     net_salary = salary - taxes
-    return render_template("finance.html", taxes=taxes, net_salary=net_salary, **session)
+    if category == 'single':
+        return render_template("finance.html", taxes=taxes, net_salary=net_salary, **session)
+    elif category == 'company':
+        return render_template("busbudget.html")
 
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
@@ -71,6 +75,9 @@ def budget(category):
             session['time_limit'] = time_limit
             session['time_required'] = time_required
             session['monthly_required'] = monthly_required if monthly_required else error
+            session['category'] = category
+            session
+            
             
             return redirect("/finance")
         except ValueError as e:
