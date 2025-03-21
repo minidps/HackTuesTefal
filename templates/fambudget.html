@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hack the Wealth - Budgeting App</title>
+    <link rel="stylesheet" href="/static/smth.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            document.querySelectorAll('input[type="number"]').forEach(function(input){
+                input.addEventListener('keydown', function(event){
+                    if (event.key === 'e' || event.key === 'E' || event.key === '-') {
+                        event.preventDefault();
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>General Info - {{ category }}</h1>
+        <form method="POST" action="/budget/{{ category }}">
+            <label>Number of workers: :</label>
+            <input type="number" name="workers" placeholder="Enter the number of worker" step="0.01" min="0" required>
+            
+            <label>Salary (Average):</label>
+            <input type="number" name="salary" placeholder="Enter your income" step="0.01" min="0" required>
+            
+            <label>Other expenses(bonuses, gear, etc.):</label>
+            <input type="number" name="expenses" placeholder="Enter expenses" step="0.01" min="0" required>
+            
+            <label>Customers (average monthly):</label>
+            <input type="number" name="customors" placeholder="Ex" step="0.01" min="0">
+            
+            <h2>Goal Setting</h2>
+            
+            <label>Goal Amount:</label>
+            <input type="number" name="goal_amount" placeholder="Enter goal amount" step="0.01" min="0" required>
+            
+            <label>Goal Description:</label>
+            <input type="text" name="goal_description" placeholder="e.g., Buy a car">
+            
+            <label>Time Limit (months):</label>
+            <input type="number" name="time_limit" placeholder="Enter months" step="0.01" min="0">
+            
+            
+            <button type="submit">Calculate Goal</button>
+        </form>
+
+        {% if result %}
+        <div class="alert alert-info mt-3">
+            {{ result }}
+        </div>
+        {% endif %}
+        {% if error %}
+        <div class="alert alert-danger mt-3">
+            {{ error }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
