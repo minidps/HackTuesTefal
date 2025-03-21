@@ -7,105 +7,229 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: left;
             margin: 0;
             padding: 0;
+            text-align: center;
             background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+        }
+        .head-top {
+            position: fixed;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            background-color: white;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        .head-text {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-family: "Open Sans", sans-serif;
+            color: rgb(105, 185, 255);
+            font-size: 25px;
+            line-height: 25px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .top-section {
+            padding-top: 95px;
+            padding-bottom: 200px;
+            size: 16px;
+            height: 20px;
+            border-bottom: 4px solid rgb(105, 185, 255);
+            background-image: linear-gradient(rgba(46, 157, 255, 0.5), rgba(46, 157, 255, 0.22));
+            text-align: center;
+        }
+        .top-section-title {
+            margin-bottom: 30px;
+            font-family: Bitter, serif;
+            color: white;
+            font-size: 60px;
+            line-height: 60px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            
+        }
+        .top-section-description {
+            margin-bottom: 40px;
+            color: rgb(46, 157, 255);
+            font-size: 25px;
+            line-height: 25px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
         .container {
-            padding: 20px;
+            width: 80%;
+            margin: auto;
+            padding: 20px 0;
+        }
+        .container-credits {
+            width: 80%;
+            margin: auto;
+            padding: 20px 0;
+            display: flex;
+            gap: 20px;
+        }
+        h2 {
+            color: #555;
         }
         .categories {
             display: flex;
             justify-content: center;
             gap: 20px;
+            margin-top: 20px;
         }
         .category {
+            width: 300px;
+            height: 225px;
             background: white;
-            padding: 30px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 120px;
-            height: 120px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             transition: transform 0.2s;
-            text-decoration: none;
-            color: black;
         }
         .category:hover {
             transform: scale(1.05);
         }
-        .category img {
-            width: 50px;
-            height: 50px;
-            background: #007bff;
-            padding: 10px;
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: #5da9ff;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .category h3 {
-            margin-top: 10px;
-            font-size: 14px;
+        .icon img {
+            width: 30px;
+            height: 30px;
         }
         .footer {
             background: #e9ecef;
-            padding: 30px;
-            margin-top: 30px;
+            margin-top: 40px;
+            bottom: 10px;
+            width: 100%;
         }
         .creators a {
             display: block;
-            color: #007bff;
+            color: #5da9ff;
             text-decoration: none;
-            margin: 5px 0;
+            margin-top: 5px;
         }
-
-        .categories-text {
-            text-align: center;
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: larger;
+        .no-blue:link {
+            text-decoration: none;
+            color: inherit;
         }
-
-        .icon-single {
-            width: 80px;
-            height: 80px;
+        .credits {
+            width: 100%;
+            text-align: right;
+        }
+        .about {
+            width: 100%;
+            text-align: left;
         }
     </style>
 </head>
-<body>
+<body style="min-height: 100vh;">
+    <div class="head-top">
+        <p class="head-text">
+            MONEY SOLVER
+        </p>
+    </div>
+    <div class="top-section">
+        <p class="top-section-title">
+            MONEY SOLVER: BUDGETING APP
+        </p>
+        <p class="top-section-description">
+            MANAGE YOUR FINANCES WITH OUR SIMPLE BUDGETING TOLL
+        </p>
+    </div>
     <div class="container">
-        <p class="categories-text">CATEGORIES</p>
+        <h2 class="categories-title">CATEGORIES</h2>
         <div class="categories">
-            <a href="/budget/single" class="category">
-                <img src="/icon1.png" class="icon-single">
-                <h3>SINGLE</h3>
+            <a class="no-blue" href="budget/single">
+            <div class="category">
+                <div class="icon">💰</div>
+                <p>SINGLE</p>
+            </div>
             </a>
-            <a href="/budget/family" class="category">
-                <img src="icon2.png" alt="Family">
-                <h3>FAMILY</h3>
+            <a class="no-blue" href="budget/family">
+            <div class="category">
+                <div class="icon">👨‍👩‍👧‍👦</div>
+                <p>FAMILY</p>
+            </div>
             </a>
-            <a href="/budget/company" class="category">
-                <img src="icon3.png" alt="Company">
-                <h3>COMPANY</h3>
+            <a class="no-blue" href="budget/business">
+            <div class="category">
+                <div class="icon">🏢</div>
+                <p>COMPANY</p>
+            </div>
             </a>
         </div>
     </div>
-    
     <div class="footer">
-        <h3>ABOUT MONEYSOLVER</h3>
-        <p>By understanding where your money goes and planning for the future, you can work toward your financial aspirations with confidence. MoneySolver will help you with just that. Stay committed, make informed decisions, and watch your goals become reality!</p>
-        
-        <h3>CREATORS</h3>
-        <div class="creators">
-            <a href="#">Anna Sivcheva</a>
-            <a href="#">Martin Angelov</a>
-            <a href="#">Dimitar Slavov</a>
-            <a href="#">Boyan Toshmakov</a>
+        <div class="container-credits">
+            <div class="about">
+                <h3>ABOUT MONEYSOLVER</h3>
+                <p>By understanding where your money goes and planning for the future, you can work toward your financial aspirations with confidence. MoneySolver will help you with just that. Stay committed, make informed decisions, and watch your goals become reality!</p>
+            </div>
+            <div class="credits">
+                <h3>CREATORS</h3>
+                <div class="creators">
+                    <a href="#">Anna Sivcheva</a>
+                    <a href="#">Martin Angelov</a>
+                    <a href="#">Dimitar Slavov</a>
+                    <a href="#">Boyan Toshmakov</a>
+                    <a href="#">Joanna Kazakova</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>
 </html>
 
 
+
+
+<script>
+        document.addEventListener('DOMContentLoaded', function(){
+            function toggleCalculationFields() {
+                var calcType = document.querySelector('input[name="calculation_type"]:checked');
+                if(calcType) {
+                    if(calcType.value === 'time'){
+                        document.getElementById('monthlyField').style.display = 'none';
+                    } else if(calcType.value === 'monthly'){
+                        document.getElementById('monthlyField').style.display = 'block';
+                    }
+                }
+            }
+            var radios = document.querySelectorAll('input[name="calculation_type"]');
+            radios.forEach(function(radio){
+                radio.addEventListener('change', toggleCalculationFields);
+            });
+            toggleCalculationFields();
+        });
+        </script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('category') || 'General';
+
+        // Update the page title and heading dynamically
+        document.title = category.charAt(0).toUpperCase() + category.slice(1) + " Budget Template";
+        document.querySelector("h1").innerText = category.charAt(0).toUpperCase() + category.slice(1) + " Budget Template";
+    });
+</script>
