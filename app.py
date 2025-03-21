@@ -6,7 +6,11 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     categories = ["Single Person", "Family", "Company"]
-    return render_template("homepage.html", categories=categories)
+    return render_template("asdasdasd.html", categories=categories)
+
+@app.route('/finance')
+def finance():
+    return
 
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
@@ -63,6 +67,7 @@ def budget(category):
             error = str(e) + traceback.format_exc() if str(e) else "Please enter valid numbers for all fields."
 
     return render_template("budget.html", category=category, result=result, error=error)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
