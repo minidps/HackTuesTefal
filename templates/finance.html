@@ -145,6 +145,9 @@
 
             <div class="goal-section">
                 <h2>Goal Progress</h2>
+                {% if savings_warning %}
+                    <p style="color: red;">{{ savings_warning }}</p>
+                {% endif %}
                 <div class="summary-grid">
                     <div class="summary-item">
                         <div class="label">Goal Amount</div>
