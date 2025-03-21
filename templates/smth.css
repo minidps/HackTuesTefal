@@ -69,8 +69,8 @@ button {
     transition: 0.3s;
 }
 
-button:hover {
-    background: #218838;
+.button:hover {
+    background: #218838 !important;
 }
 
 /* Mobile Responsive */

@@ -4,14 +4,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    categories = ["Single Person", "Couple", "Family", "Company"]
-    return render_template("home.html", categories=categories)
+    categories = ["Single Person", "Family", "Company"]
+    return render_template("homepage.html", categories=categories)
 
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
+    render_template('budget.html')
     result = None
     error = None
-    
+
     if request.method == 'POST':
         try:
             salary = float(request.form.get('salary', 0))
