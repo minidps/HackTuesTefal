@@ -73,6 +73,10 @@ button {
     background: #218838 !important;
 }
 
+.categories-text {
+    text-align: center;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .container {
