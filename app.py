@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 import traceback
 
 app = Flask(__name__)
@@ -10,8 +10,8 @@ def home():
 
 @app.route('/finance')
 def finance():
-    return
-
+    # salary = session['salary']
+    return render_template("finance.html")
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
     result = None
@@ -62,7 +62,9 @@ def budget(category):
 
             else:
                 error = "Please select a valid calculation type."
-
+            
+            session['salary'] = salary
+            return redirect("/finance")
         except ValueError as e:
             error = str(e) + traceback.format_exc() if str(e) else "Please enter valid numbers for all fields."
 
