@@ -58,9 +58,8 @@ def budget(category):
                 time_required = goal_amount / monthly_savings
                 result = f"It will take approximately {time_required:.1f} months to {goal_description}."
 
-            if goal_amount <= 0:
-                result = f"You don't need to save anything to {goal_description}."
-            elif time_limit <= 0:
+            
+            if time_limit <= 0:
                 error = "Time limit must be greater than zero."
             else:
                 monthly_required = goal_amount / time_limit
