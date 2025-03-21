@@ -8,7 +8,7 @@ app.secret_key = 'your_muihihi_secret_key_here'
 @app.route('/')
 def home():
     categories = ["Single Person", "Family", "Company"]
-    return render_template("asdasdasd.html", categories=categories)
+    return render_template("homepage.html", categories=categories)
 
 @app.route('/finance')
 def finance():
