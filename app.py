@@ -38,6 +38,7 @@ def budget(category):
             workers = int(request.form.get('workers',0))
             customers = int(request.form.get('customers',0))
             gain = float(request.form.get('gain',0))
+            donations = float(request.form.get('donations',0))
 
             # Validate non-negative inputs
             if any(value < 0 for value in [salary, expenses, additional_income, goal_amount, time_limit]):
@@ -83,6 +84,7 @@ def budget(category):
             session['workers'] = workers
             session['customers'] = customers
             session['gain'] = gain
+            session['donations'] = donations
             
             
             return redirect("/finance")
