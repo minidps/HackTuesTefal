@@ -37,7 +37,7 @@ def budget(category):
             additional_income = float(request.form.get('additional_income', 0))
             goal_amount = float(request.form.get('goal_amount', 0))
             time_limit_str = request.form.get('time_limit', 0).strip()
-            time_limit = float(time_limit_str) if time_limit_str else 0
+            time_limit =float(time_limit_str) if time_limit_str else 0
 
             # Validate non-negative inputs
             if any(value < 0 for value in [salary, expenses, additional_income, goal_amount, time_limit]):
