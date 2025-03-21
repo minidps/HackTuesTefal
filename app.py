@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request, redirect, session
 import traceback
 import math
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
-app.secret_key = 'your_muihihi_secret_key_here'
+load_dotenv()
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'fallback_secret_key')
 
 @app.route('/')
 def home():
