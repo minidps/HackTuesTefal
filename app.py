@@ -22,7 +22,7 @@ def finance():
         'time_limit': session.get('time_limit', 0),
         'monthly_required': session.get('monthly_required', '')
     }
-    return render_template("finance.html", **finance_data)
+    return render_template("finance.html", **session)
 
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
@@ -77,6 +77,7 @@ def budget(category):
             session['goal_amount'] = goal_amount
             session['goal_description'] = goal_description
             session['time_limit'] = time_limit
+            session['time_required'] = time_required
             session['monthly_required'] = monthly_required if monthly_required else error
 
             return redirect("/finance")
