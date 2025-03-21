@@ -1,53 +1,106 @@
-<bodyrhrrh>
-    <div class="container mt-5">
-        <h1>{{ category.replace('_', ' ').title() }} Budget Template</h1>
-        <form method="post">
-            <div class="form-group">
-                <label for="salary">Salary (Income):</label>
-                <input type="number" step="0.01" class="form-control" name="salary" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneySolver</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px 0;
+        }
+        h2 {
+            color: #555;
+        }
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .category {
+            width: 200px;
+            height: 150px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .category:hover {
+            transform: scale(1.05);
+        }
+        .icon {
+            width: 60px;
+            height: 60px;
+            background: #5da9ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon img {
+            width: 30px;
+            height: 30px;
+        }
+        .footer {
+            background: #e9ecef;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        .creators a {
+            display: block;
+            color: #5da9ff;
+            text-decoration: none;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>КАТЕГОРИИ</h2>
+        <div class="categories">
+            <div class="category" onclick="alert('Single category selected!')">
+                <div class="icon">💰</div>
+                <p>SINGLE</p>
             </div>
-            <div class="form-group">
-                <label for="expenses">Expenses:</label>
-                <input type="number" step="0.01" class="form-control" name="expenses" required>
+            <div class="category" onclick="alert('Family category selected!')">
+                <div class="icon">👨‍👩‍👧‍👦</div>
+                <p>FAMILY</p>
             </div>
-            <div class="form-group">
-                <label for="additional_income">Additional Income (optional):</label>
-                <input type="number" step="0.01" class="form-control" name="additional_income">
+            <div class="category" onclick="alert('Company category selected!')">
+                <div class="icon">🏢</div>
+                <p>COMPANY</p>
             </div>
-            <hr>
-            <h3>Goal Setting</h3>
-            <div class="form-group">
-                <label for="goal_amount">Goal Amount:</label>
-                <input type="number" step="0.01" class="form-control" name="goal_amount" required>
-            </div>
-            <div class="form-group">
-                <label for="goal_description">Goal Description:</label>
-                <input type="text" class="form-control" name="goal_description" placeholder="e.g., Buy a car" required>
-            </div>
-            <div class="form-group">
-                <label>Calculation Option:</label><br>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="calculation_type" id="calcTime" value="time" required>
-                  <label class="form-check-label" for="calcTime">How long will it take?</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="calculation_type" id="calcMonthly" value="monthly" required>
-                  <label class="form-check-label" for="calcMonthly">How much to save per month?</label>
-                </div>
-            </div>
-            <div class="form-group" id="monthlyField" style="display:none;">
-                <label for="time_limit">Time Limit (Enter time in months):</label>
-                <input type="number" step="0.1" class="form-control" name="time_limit">
-            </div>
-            <button type="submit" class="btn btn-success">Calculate Goal</button>
-        </form>
-        {% if result %}
-        <div class="alert alert-info mt-3">
-            {{ result }}
         </div>
-        {% endif %}
     </div>
-    </body>
+    <div class="footer">
+        <div class="container">
+            <h3>ABOUT MONEYSOLVER</h3>
+            <p>By understanding where your money goes and planning for the future, you can work toward your financial aspirations with confidence. MoneySolver will help you with just that. Stay committed, make informed decisions, and watch your goals become reality!</p>
+            <h3>CREATORS</h3>
+            <div class="creators">
+                <a href="#">Anna Sivcheva</a>
+                <a href="#">Martin Angelov</a>
+                <a href="#">Dimitar Slavov</a>
+                <a href="#">Boyan Toshmakov</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
 
     <script>
