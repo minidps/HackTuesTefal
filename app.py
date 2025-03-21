@@ -52,7 +52,7 @@ def budget(category):
             elif monthly_savings <= 0:
                 result = "You cannot reach your goal with your current income and expenses."
             else:
-                time_required = goal_amount / monthly_savings
+                time_required = math.ceil(goal_amount / monthly_savings)
                 result = f"It will take approximately {time_required:.1f} months to {goal_description}."
 
             
