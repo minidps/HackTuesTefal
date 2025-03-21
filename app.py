@@ -35,6 +35,9 @@ def budget(category):
             goal_amount = float(request.form.get('goal_amount', 0))
             time_limit_str = request.form.get('time_limit', 0).strip()
             time_limit = math.ceil(float(time_limit_str)) if time_limit_str else 0
+            workers = int(request.form.get('workers',0))
+            customers = int(request.form.get('customers',0))
+            gain = float(request.form.get('gain',0))
 
             # Validate non-negative inputs
             if any(value < 0 for value in [salary, expenses, additional_income, goal_amount, time_limit]):
@@ -77,7 +80,9 @@ def budget(category):
             session['time_required'] = time_required
             session['monthly_required'] = monthly_required if monthly_required else error
             session['category'] = category
-            session
+            session['workers'] = workers
+            session['customers'] = customers
+            session['gain'] = gain
             
             
             return redirect("/finance")

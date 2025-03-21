@@ -44,7 +44,11 @@
                         {{'%0.2f' % monthly_required}} $/month
                     </p>
                 
-                elif category == 'business'
+                elif category == 'business':
+                <label>Gross Income:</label>
+                <p>
+                    {{ salary|float|round(2) }} $ 
+                </p>
             </form>
         </div>
     </body>
