@@ -5,25 +5,6 @@
     <link rel="stylesheet" href="/static/smth.css">
     <script>
         document.addEventListener('DOMContentLoaded', function(){
-            function toggleCalculationFields() {
-                var calcType = document.querySelector('input[name="calculation_type"]:checked');
-                var monthlyField = document.getElementById('monthlyField');
-                if (calcType && monthlyField) {
-                    if (calcType.value === 'time') {
-                        monthlyField.style.display = 'none';
-                    } else if (calcType.value === 'monthly') {
-                        monthlyField.style.display = 'block';
-                    }
-                }
-            }
-            var radios = document.querySelectorAll('input[name="calculation_type"]');
-            radios.forEach(function(radio){
-                radio.addEventListener('change', toggleCalculationFields);
-            });
-            toggleCalculationFields();
-        });
-
-        document.addEventListener('DOMContentLoaded', function(){
             document.querySelectorAll('input[type="number"]').forEach(function(input){
                 input.addEventListener('keydown', function(event){
                     if (event.key === 'e' || event.key === 'E' || event.key === '-') {
@@ -55,15 +36,9 @@
             <label>Goal Description:</label>
             <input type="text" name="goal_description" placeholder="e.g., Buy a car">
             
-            <div class="radio-group">
-                <label><input type="radio" name="calculation_type" value="time" required> How long will it take?</label>
-                <label><input type="radio" name="calculation_type" value="monthly"> How much to save per month?</label>
-            </div>
+            <label>Time Limit (months):</label>
+            <input type="number" name="time_limit" placeholder="Enter months" step="0.01" min="0">
             
-            <div id="monthlyField" style="display: none;">
-                <label>Time Limit (months):</label>
-                <input type="number" name="time_limit" placeholder="Enter months" step="0.01" min="0">
-            </div>
             
             <button type="submit">Calculate Goal</button>
         </form>
