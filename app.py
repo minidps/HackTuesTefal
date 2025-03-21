@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session
 import traceback
 
 app = Flask(__name__)
+app.secret_key = 'your_muihihi_secret_key_here'
 
 @app.route('/')
 def home():
