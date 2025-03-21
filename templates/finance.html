@@ -8,41 +8,43 @@
         <div class="container">
             <h1>Results:</h1>
             <form method="POST" action="/budget/{{ category }}">
+                if category == 'single':
+                    <label>Gross Income:</label>
+                    <p>
+                        {{ salary|float|round(2) }} $ 
+                    </p>
 
-                <label>Gross Income:</label>
-                <p>
-                    {{ salary|float|round(2) }} 
-                </p>
+                    <label>Taxes:</label>
+                    <p>
+                        {{taxes}} $
+                    </p>
 
-                <label>Taxes:</label>
-                <p>
-                    {{taxes}}
-                </p>
+                    <label>Net Income:</label>
+                    <p>
+                        {{net_salary}} $
+                    </p>
 
-                <label>Net Income:</label>
-                <p>
-                    {{net_salary}}
-                </p>
+                    <label>Your Goal:</label>
+                    <p>
+                        {{goal_amount}} $
+                    </p>
 
-                <label>Your Goal:</label>
-                <p>
-                    {{goal_amount}}
-                </p>
+                    <label>Estimated Time Untill Your Goal:</label>
+                    <p>
+                        {{time_required}} months
+                    </p>
 
-                <label>Estimated Time Untill Your Goal:</label>
-                <p>
-                    {{time_required}} months
-                </p>
+                    <label>Your Time Limit:</label>
+                    <p>
+                        {{ time_limit }} months
+                    </p>
 
-                <label>Your Time Limit:</label>
-                <p>
-                    {{ time_limit }} months
-                </p>
-
-                <label>Money Needed Per Month For Reaching Your Goal:</label>
-                <p>
-                    {{'%0.2f' % monthly_required}}
-                </p>
+                    <label>Money Needed Per Month For Reaching Your Goal:</label>
+                    <p>
+                        {{'%0.2f' % monthly_required}} $/month
+                    </p>
+                
+                elif category == 'business'
             </form>
         </div>
     </body>
