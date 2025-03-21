@@ -23,15 +23,21 @@
             <input type="number" name="workers" placeholder="Enter the number of worker" step="0.01" min="0" required>
             
             <label>Salary (Average):</label>
-            <input type="number" name="salary" placeholder="Enter your income" step="0.01" min="0" required>
+            <input type="number" name="salary" placeholder="Enter average salary" step="0.01" min="0" required>
             
             <label>Other expenses(bonuses, gear, etc.):</label>
             <input type="number" name="expenses" placeholder="Enter expenses" step="0.01" min="0" required>
             
             <label>Customers (average monthly):</label>
-            <input type="number" name="customors" placeholder="Ex" step="0.01" min="0">
+            <input type="number" name="customors" placeholder="Enter customers" step="0.01" min="0">
+
+            <label>Average gain from customers(per month):</label>
+            <input type="number" name="gain" placeholder="Enter your income from customers" step="0.01" min="0" required>
+
+            <label>Other gains:(sponsors, donations, etc.)</label>
+            <input type="number" name="donations" placeholder="Enter your other incomes" step="0.01" min="0" required>
             
-            <h2>Goal Setting</h2>
+            <h2>Goal</h2>
             
             <label>Goal Amount:</label>
             <input type="number" name="goal_amount" placeholder="Enter goal amount" step="0.01" min="0" required>
@@ -39,23 +45,12 @@
             <label>Goal Description:</label>
             <input type="text" name="goal_description" placeholder="e.g., Buy a car">
             
-            <label>Time Limit (months):</label>
+            <label>Time Limit (optional):</label>
             <input type="number" name="time_limit" placeholder="Enter months" step="0.01" min="0">
             
             
             <button type="submit">Calculate Goal</button>
         </form>
-
-        {% if result %}
-        <div class="alert alert-info mt-3">
-            {{ result }}
-        </div>
-        {% endif %}
-        {% if error %}
-        <div class="alert alert-danger mt-3">
-            {{ error }}
-        </div>
-        {% endif %}
     </div>
 </body>
 </html>
