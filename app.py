@@ -12,18 +12,27 @@ def home():
 
 @app.route('/finance')
 def finance():
-    category = session['category']
-    salary = session['salary']
-    taxes = salary * 0.1378
-    net_salary = salary - taxes
-    if category == 'single':
-        return render_template("finance.html", taxes=taxes, net_salary=net_salary, **session)
-    elif category == 'company':
-        return render_template("busbudget.html")
+    category = session.get('category', 'single')
+    salary = session.get('salary', 0)
+    
+
+    def calculate_net_salary(gross):
+        social_security = min(gross, 3800) * 0.1378
+        tax = (gross - social_security) * 0.10
+
+        taxes = social_security + tax
+        return round(gross - social_security - tax, 2), taxes
+
+    net_salary, taxes = calculate_net_salary(salary)
+
+    if category in ['single', 'family']:
+        return render_template("finance.html",taxes = taxes, net_salary=net_salary, **session)
+    elif category == 'business':
+        return render_template("companybudget.html")
+    return redirect('/')
 
 @app.route('/budget/<category>', methods=['GET', 'POST'])
 def budget(category):
-    result = None
     error = None
 
     if request.method == 'POST':
@@ -33,6 +42,7 @@ def budget(category):
             expenses = float(request.form.get('expenses', 0))
             additional_income = float(request.form.get('additional_income', 0))
             goal_amount = float(request.form.get('goal_amount', 0))
+            goal_description = request.form.get('goal_description', 'reach your goal')  # Add default
             time_limit_str = request.form.get('time_limit', 0).strip()
             time_limit = math.ceil(float(time_limit_str)) if time_limit_str else 0
             workers = int(request.form.get('workers',0))
@@ -40,35 +50,21 @@ def budget(category):
             gain = float(request.form.get('gain',0))
             donations = float(request.form.get('donations',0))
 
-            # Validate non-negative inputs
-            if any(value < 0 for value in [salary, expenses, additional_income, goal_amount, time_limit]):
-                raise ValueError("All values must be positive numbers.")
-
-            # Get optional fields
-            goal_description = request.form.get('goal_description', "reach your goal")
-            calculation_type = request.form.get('calculation_type')
+            # Initialize variables
+            time_required = 0
+            monthly_required = 0
 
             # Calculate monthly savings
             monthly_savings = salary + additional_income - expenses
 
-            if goal_amount <= 0:
-                result = f"You don't need to save anything to {goal_description}."
-            elif monthly_savings <= 0:
-                result = "You cannot reach your goal with your current income and expenses."
-            else:
-                time_required = math.ceil(goal_amount / monthly_savings)
-                result = f"It will take approximately {time_required:.1f} months to {goal_description}."
-
-            
-            if time_limit <= 0:
-                error = "Time limit must be greater than zero."
-            else:
-                monthly_required = goal_amount / time_limit
-                if monthly_required <= monthly_savings:
-                    result = f"You need to save approximately {monthly_required:.2f} per month to {goal_description} in {time_limit} months."
+            # Calculate time required or monthly required based on inputs
+            if monthly_savings > 0 and goal_amount > 0:
+                if time_limit > 0:
+                    monthly_required = goal_amount / time_limit
+                    time_required = time_limit
                 else:
-                    result = f"You need {monthly_required:.2f} per month, but you only save {monthly_savings:.2f}. Adjust your income or expenses."
-
+                    time_required = math.ceil(goal_amount / monthly_savings)
+                    monthly_required = monthly_savings
 
             # Store data in session
             session['salary'] = salary
@@ -79,19 +75,18 @@ def budget(category):
             session['goal_description'] = goal_description
             session['time_limit'] = time_limit
             session['time_required'] = time_required
-            session['monthly_required'] = monthly_required if monthly_required else error
+            session['monthly_required'] = monthly_required
             session['category'] = category
             session['workers'] = workers
             session['customers'] = customers
             session['gain'] = gain
             session['donations'] = donations
-            
-            
+
             return redirect("/finance")
         except ValueError as e:
-            error = str(e) + traceback.format_exc() if str(e) else "Please enter valid numbers for all fields."
+            error = "Please enter valid numbers for all fields."
 
-    return render_template("budget.html", category=category, result=result, error=error)
+    return render_template("budget.html", category=category, error=error)
 
 if __name__ == '__main__':
     app.run(debug=True)

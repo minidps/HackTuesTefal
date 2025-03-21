@@ -1,8 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hack the Wealth - Budgeting App</title>
-    <link rel="stylesheet" href="/static/smth.css">
+    <title>Budget Planning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .head-text {
+            margin: 0;
+            font-family: "Open Sans", sans-serif;
+            color: rgb(105, 185, 255);
+            font-size: 20px;
+            line-height: 20px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 10px 0;
+            background-color: white;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        h1 {
+            color: #2E9DFF;
+            text-align: center;
+            margin: 0 0 20px 0;
+            font-size: 24px;
+        }
+
+        h2 {
+            color: #2E9DFF;
+            margin: 0 0 15px 0;
+            font-size: 18px;
+        }
+
+        .form-layout {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-section {
+            flex: 1;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            color: #666;
+            font-size: 13px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2E9DFF;
+        }
+
+        input[type="number"] {
+            appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        button {
+            width: 100%;
+            background-color: #2E9DFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #2580d8;
+        }
+
+        .error {
+            color: #dc3545;
+            background-color: #f8d7da;
+            padding: 8px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head-text">MONEY SOLVER</div>
+    <div class="container">
+        <h1>{{ category.upper() }} BUDGET PLANNING</h1>
+
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="/budget/{{ category }}">
+            <div class="form-layout">
+                <div class="form-section">
+                    <h2>INCOME & EXPENSES</h2>
+                    <div class="input-group">
+                        <label>Monthly Salary</label>
+                        <input type="number" name="salary" placeholder="Enter your monthly income" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Monthly Expenses</label>
+                        <input type="number" name="expenses" placeholder="Enter monthly expenses" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Additional Monthly Income</label>
+                        <input type="number" name="additional_income" placeholder="Extra monthly earnings" step="0.01" min="0">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>FINANCIAL GOALS</h2>
+                    <div class="input-group">
+                        <label>Target Amount</label>
+                        <input type="number" name="goal_amount" placeholder="Enter your target amount" step="0.01" min="0" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Goal Description</label>
+                        <input type="text" name="goal_description" placeholder="e.g., Buy a car, Save for vacation">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Time Frame (Months)</label>
+                        <input type="number" name="time_limit" placeholder="Enter number of months" step="1" min="0">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">CALCULATE PLAN</button>
+        </form>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function(){
             document.querySelectorAll('input[type="number"]').forEach(function(input){
@@ -14,34 +189,5 @@
             });
         });
     </script>
-</head>
-<body>
-    <div class="container">
-        <h1>General Info - {{ category }}</h1>
-        <form method="POST" action="/budget/{{ category }}">
-            <label>Salary (Income):</label>
-            <input type="number" name="salary" placeholder="Enter your income" step="0.01" min="0" required>
-            
-            <label>Expenses:</label>
-            <input type="number" name="expenses" placeholder="Enter expenses" step="0.01" min="0" required>
-            
-            <label>Additional Income (optional):</label>
-            <input type="number" name="additional_income" placeholder="Extra earnings" step="0.01" min="0">
-            
-            <h2>Goal Setting</h2>
-            
-            <label>Goal Amount:</label>
-            <input type="number" name="goal_amount" placeholder="Enter goal amount" step="0.01" min="0" required>
-            
-            <label>Goal Description:</label>
-            <input type="text" name="goal_description" placeholder="e.g., Buy a car">
-            
-            <label>Time Limit (months):</label>
-            <input type="number" name="time_limit" placeholder="Enter months" step="0.01" min="0">
-            
-            
-            <button type="submit">Calculate Goal</button>
-        </form> 
-    </div>
 </body>
 </html>
